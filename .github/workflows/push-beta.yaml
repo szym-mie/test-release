@@ -6,7 +6,7 @@ on:
       - 'v*-beta'
 
 env:
-  ORIGIN: upstream
+  ORIGIN: origin
   MAKE_APP_CONF: .github/scripts/make-app-conf.py
   APP_CONF: app.json
 
