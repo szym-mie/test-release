@@ -1,7 +1,8 @@
 {
   "name": "rel",
   "identifier": "com.test.rel",
-  "version": "0.1.15",
+  "author": "szym-mie",
+  "version": "0.1.18",
   "deps": [
     "com.io.io",
     "org.test.tester"

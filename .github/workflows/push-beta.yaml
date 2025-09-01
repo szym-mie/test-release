@@ -52,16 +52,17 @@ jobs:
 
       - name: Merge main into beta
         run: |
-          git merge ${{ env.ORIGIN }}/main --no-commit --no-ff
+          git merge -s ours ${{ env.ORIGIN }}/main --no-commit --no-ff || echo "CONFLICT"
+          git checkout ${{ env.ORIGIN }}/main -- .
 
       - name: Add version info
         run: |
           VERSION=${{ needs.boot.outputs.version }}
           echo -e "v $VERSION"
-          echo -e "<<<<\e[33m"
+          echo -e "<<<<\e[32m"
           cat ${{ env.APP_CONF }}
           echo -e ""
-          echo -e "\e[0m----\e[35m"
+          echo -e "\e[0m----\e[36m"
           cat ${{ env.APP_CONF }} | python ${{ env.MAKE_APP_CONF }} $VERSION > ${{ env.APP_CONF }}.new
           mv ${{ env.APP_CONF }}.new ${{ env.APP_CONF }}
           cat ${{ env.APP_CONF }}
@@ -76,7 +77,7 @@ jobs:
           echo -e "prev_rev $PREV_REV"
           echo -e "# $VERSION CHANGELOG" > ${{ env.CHANGE_LOG }}
           echo -e "" >> ${{ env.CHANGE_LOG }}
-          git log $PREV_REV.. --pretty="format:- %s - by *%ae* at %aD" >> ${{ env.CHANGE_LOG }}
+          git log $PREV_REV..${{ env.ORIGIN }}/HEAD --pretty="format:- %s - by *%ae* at %aD" >> ${{ env.CHANGE_LOG }}
           echo -e "----"
           cat ${{ env.CHANGE_LOG }}
           echo -e "----"
