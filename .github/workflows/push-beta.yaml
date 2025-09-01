@@ -37,7 +37,7 @@ jobs:
 
       - name: Merge main into beta (no commit yet)
         run: |
-          git merge ${{ env.ORIGIN }}/main --no-commit --no-ff || echo "nothing merged"
+          git merge ${{ env.ORIGIN }}/main --no-commit --no-ff || echo "No merge"
 
       - name: Update version file
         run: |
@@ -51,10 +51,7 @@ jobs:
           cat ${{ env.APP_CONF }}
           echo -e ">>>>"
           git add ${{ env.APP_CONF }}
-
-      - name: Commit merge + file changes
-        run: |
-          git commit -m "$VERSION" || echo "nothing to commit"
+          git commit -m "$VERSION" || echo "No commit"
 
       - name: Push changes
         run: git push ${{ env.ORIGIN }} beta
