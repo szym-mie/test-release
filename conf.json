@@ -1,7 +1,7 @@
 {
   "name": "rel",
   "identifier": "com.test.rel",
-  "version": "refs/tags/v0.1.2-beta",
+  "version": "0.0.0",
   "deps": [
     "com.io.io",
     "org.test.tester"

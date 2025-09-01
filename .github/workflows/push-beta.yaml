@@ -46,7 +46,8 @@ jobs:
           echo -e "<<<<"
           cat ${{ env.APP_CONF }}
           echo -e "----"
-          cat ${{ env.APP_CONF }} | python ${{ env.MAKE_APP_CONF }} "$VERSION" > ${{ env.APP_CONF }}
+          cat ${{ env.APP_CONF }} | python ${{ env.MAKE_APP_CONF }} "$VERSION" > ${{ env.APP_CONF }}.new
+          mv ${{ env.APP_CONF }}.new ${{ env.APP_CONF }}
           cat ${{ env.APP_CONF }}
           echo -e ">>>>"
           git add ${{ env.APP_CONF }}
