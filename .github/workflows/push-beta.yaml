@@ -76,7 +76,7 @@ jobs:
           echo -e "prev_rev $PREV_REV"
           echo -e "# $VERSION CHANGELOG" > ${{ env.CHANGE_LOG }}
           echo -e "" >> ${{ env.CHANGE_LOG }}
-          git log $PREV_REV.. --pretty="format:- %s - by *%ae* at %aD" >> ${{ env.CHANGE_LOG }}
+          git log $PREV_REV..${{ env.ORIGIN }}/HEAD --pretty="format:- %s - by *%ae* at %aD" >> ${{ env.CHANGE_LOG }}
           echo -e "----"
           cat ${{ env.CHANGE_LOG }}
           echo -e "----"
