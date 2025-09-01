@@ -42,7 +42,12 @@ jobs:
       - name: Update version file
         run: |
           VERSION=$(echo ${{ github.ref }} | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+          echo -e "<<<<"
+          cat ${{ env.APP_CONF }}
+          echo -e "----"
           cat ${{ env.APP_CONF }} | python ${{ env.MAKE_APP_CONF }} "$VERSION" > ${{ env.APP_CONF }}
+          cat ${{ env.APP_CONF }}
+          echo -e ">>>>"
           git add ${{ env.APP_CONF }}
 
       - name: Commit merge + file changes

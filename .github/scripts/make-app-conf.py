@@ -14,7 +14,7 @@ try:
   conf.version = version
   dump(conf, stdout)
 except ValueError:
-  eprint('missing parameters', file=stderr)
+  eprint('missing parameters')
   exit(2)
 
 exit(0)
