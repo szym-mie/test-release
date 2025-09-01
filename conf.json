@@ -1,7 +1,7 @@
 {
   "name": "rel",
   "identifier": "com.test.rel",
-  "version": "no-version",
+  "version": "0.1.15",
   "deps": [
     "com.io.io",
     "org.test.tester"
