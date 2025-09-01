@@ -52,16 +52,16 @@ jobs:
 
       - name: Merge main into beta
         run: |
-          git merge ${{ env.ORIGIN }}/main --no-commit --no-ff
+          git merge ${{ env.ORIGIN }}/main --no-commit --no-ff || echo "CONFLICT"
 
       - name: Add version info
         run: |
           VERSION=${{ needs.boot.outputs.version }}
           echo -e "v $VERSION"
-          echo -e "<<<<\e[33m"
+          echo -e "<<<<\e[32m"
           cat ${{ env.APP_CONF }}
           echo -e ""
-          echo -e "\e[0m----\e[35m"
+          echo -e "\e[0m----\e[36m"
           cat ${{ env.APP_CONF }} | python ${{ env.MAKE_APP_CONF }} $VERSION > ${{ env.APP_CONF }}.new
           mv ${{ env.APP_CONF }}.new ${{ env.APP_CONF }}
           cat ${{ env.APP_CONF }}
