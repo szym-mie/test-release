@@ -73,7 +73,7 @@ jobs:
       - name: Add change log
         run: |
           VERSION=${{ needs.boot.outputs.version }}
-          PREV_REV=${{ env.ORIGIN }}/$(git rev-parse HEAD)
+          PREV_REV=$(git rev-parse HEAD)
           echo -e "prev_rev $PREV_REV"
           echo -e "# $VERSION CHANGELOG" > ${{ env.CHANGE_LOG }}
           echo -e "" >> ${{ env.CHANGE_LOG }}
