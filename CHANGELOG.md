@@ -1,8 +1,6 @@
-# 0.1.18 CHANGELOG
+# 0.1.22 CHANGELOG
 
-- update push-beta - by *szym.mie@gmail.com* at Mon, 1 Sep 2025 21:12:29 +0200
-- update push-beta - by *szym.mie@gmail.com* at Mon, 1 Sep 2025 21:08:00 +0200
-- add author metadata - by *szym.mie@gmail.com* at Mon, 1 Sep 2025 21:03:57 +0200
-- update file reg - by *szym.mie@gmail.com* at Mon, 1 Sep 2025 21:03:47 +0200
-- add file - by *szym.mie@gmail.com* at Mon, 1 Sep 2025 21:03:37 +0200
-- update push-beta - by *szym.mie@gmail.com* at Mon, 1 Sep 2025 21:02:59 +0200
+- remove origin from beta prev_rev - by *szym.mie@gmail.com* at Mon, 1 Sep 2025 21:49:29 +0200
+- revert to fetch all - by *szym.mie@gmail.com* at Mon, 1 Sep 2025 21:48:19 +0200
+- update push-beta - by *szym.mie@gmail.com* at Mon, 1 Sep 2025 21:46:07 +0200
+- update push-beta - by *szym.mie@gmail.com* at Mon, 1 Sep 2025 21:43:10 +0200
