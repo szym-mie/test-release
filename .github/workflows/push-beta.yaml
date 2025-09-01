@@ -12,6 +12,7 @@ env:
   ORIGIN: origin
   MAKE_APP_CONF: .github/scripts/make-app-conf.py
   APP_CONF: conf.json
+  VERSION: no-version
 
 jobs:
   merge-main-into-beta:
@@ -23,6 +24,12 @@ jobs:
         with:
           fetch-depth: 0  # required for merging
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract variables
+        run: |
+          VERSION=$(echo ${{ github.ref }} | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+          echo -e "v $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Configure Git
         run: |
@@ -37,23 +44,23 @@ jobs:
 
       - name: Merge main into beta
         run: |
-          git merge ${{ env.ORIGIN }}/main --no-commit --no-ff || echo "No merge"
+          git merge ${{ env.ORIGIN }}/main --no-commit --no-ff
 
       - name: Add version info
         run: |
-          VERSION=$(echo ${{ github.ref }} | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
-          echo -e "v $VERSION"
           echo -e "<<<<"
           cat ${{ env.APP_CONF }}
           echo -e ""
           echo -e "----"
-          cat ${{ env.APP_CONF }} | python ${{ env.MAKE_APP_CONF }} "$VERSION" > ${{ env.APP_CONF }}.new
+          cat ${{ env.APP_CONF }} | python ${{ env.MAKE_APP_CONF }} ${{ env.VERSION }} > ${{ env.APP_CONF }}.new
           mv ${{ env.APP_CONF }}.new ${{ env.APP_CONF }}
           cat ${{ env.APP_CONF }}
           echo -e ""
           echo -e ">>>>"
           git add ${{ env.APP_CONF }}
-          git commit -m "$VERSION" || echo "No commit"
+
+      - name: Commit changes
+        run: git commit -m "${{ env.VERSION }}"
 
       - name: Push changes
         run: git push ${{ env.ORIGIN }} beta
