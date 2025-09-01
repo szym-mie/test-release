@@ -1,0 +1,47 @@
+name: Merge main into beta on release
+
+on:
+  push:
+    tags:
+      - 'v*-beta'
+
+env:
+  ORIGIN: upstream
+  MAKE_APP_CONF: .github/scripts/make-app-conf.py
+  APP_CONF: app.json
+
+jobs:
+  merge-main-into-beta:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required for merging
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch all branches
+        run: git fetch ${{ env.ORIGIN }}
+
+      - name: Checkout beta branch
+        run: git checkout beta
+
+      - name: Merge main into beta (no commit yet)
+        run: git merge ${{ env.ORIGIN }}/main --no-commit --no-ff || echo "nothing merged"
+
+      - name: Update version file
+        run: |
+          python ${{ env.MAKE_APP_CONF }} ${{ github.ref }} > ${{ env.APP_CONF }}
+          git add ${{ env.APP_CONF }}
+
+      - name: Commit merge + file changes
+        run: |
+          git commit -m "${{ github.ref }}" || echo "nothing to commit"
+
+      - name: Push changes
+        run: git push ${{ env.ORIGIN }} beta
