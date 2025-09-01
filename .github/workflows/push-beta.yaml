@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*-beta'
 
+permissions:
+  contents: write
+
 env:
   ORIGIN: origin
   MAKE_APP_CONF: .github/scripts/make-app-conf.py
@@ -19,6 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # required for merging
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure Git
         run: |
