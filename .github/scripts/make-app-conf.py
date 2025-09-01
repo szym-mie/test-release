@@ -11,7 +11,7 @@ if __name__ != '__main__':
 try:
   _program, version, *_ = argv
   conf = load(stdin)
-  conf.version = version
+  conf['version'] = version
   dump(conf, stdout)
 except ValueError:
   eprint('missing parameters')
