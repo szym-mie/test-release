@@ -70,7 +70,7 @@ jobs:
           PREV_REV=$(git rev-parse HEAD)
           echo -e "# ${{ env.VERSION }} CHANGELOG" > ${{ env.CHANGE_LOG }}
           echo -e "" >> ${{ env.CHANGE_LOG }}
-          git log PREV_REV.. --pretty="format:- %s - by *%ae* at %aD" >> ${{ env.CHANGE_LOG }}
+          git log $PREV_REV.. --pretty="format:- %s - by *%ae* at %aD" >> ${{ env.CHANGE_LOG }}
           git add ${{ env.CHANGE_LOG }}
 
       - name: Commit changes
