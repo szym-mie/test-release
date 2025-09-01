@@ -44,6 +44,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Fetch all branches
+        run: git fetch origin
+
       - name: Checkout beta branch
         run: git checkout beta
 
@@ -101,6 +104,9 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Fetch all branches
+        run: git fetch origin
+
       - name: Checkout beta branch
         run: git checkout beta
       
@@ -123,6 +129,9 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch all branches
+        run: git fetch origin
 
       - name: Checkout beta branch
         run: git checkout beta
