@@ -2,7 +2,7 @@
   "name": "rel",
   "identifier": "com.test.rel",
   "author": "szym-mie",
-  "version": "0.1.22",
+  "version": "0.1.24",
   "deps": [
     "com.io.io",
     "org.test.tester"

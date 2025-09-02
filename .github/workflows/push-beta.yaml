@@ -52,8 +52,8 @@ jobs:
 
       - name: Merge main into beta
         run: |
-          git merge -s ours ${{ env.ORIGIN }}/main --no-commit --no-ff || echo "CONFLICT"
-          git checkout ${{ env.ORIGIN }}/main -- .
+          git merge -s ours ${{ github.ref }} --no-commit --no-ff || echo "CONFLICT"
+          git checkout ${{ github.ref }} -- .
 
       - name: Add version info
         run: |
